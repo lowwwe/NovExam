@@ -7,6 +7,7 @@
 // ---------------------------------------------------------------------------------
 // Known Bugs: 
 // time estimzate 120 min 15:43
+// actual   61 minutes 16:45
 
 
 
@@ -31,11 +32,11 @@ int main()
 	std::cin >> adultNo;
 	std::cout << "How many senior tickets do you want ? ";
 	std::cin >> seniorNo;
-	if (childNo < 0 || adultNo < 0 || seniorNo < 0)
+	if (childNo < 0 || adultNo < 0 || seniorNo < 0) // check for negative Nos
 	{
 		std::cout << "Error - you cannot have negative numbers." << std::endl;
 	}
-	else if ((childNo + adultNo + seniorNo) == 0)
+	else if ((childNo + adultNo + seniorNo) == 0) // check no tickets
 	{
 		std::cout << "Error - You must buy at least one ticket. " << std::endl;
 	}
@@ -45,7 +46,7 @@ int main()
 	}
 	else
 	{
-		totalCost = calTotalCost(childNo, adultNo, seniorNo);
+		totalCost = calTotalCost(childNo, adultNo, seniorNo); //get total cost 
 		std::cout << "The total cost of your tickets is $" << std::setprecision(2) << totalCost << std::endl;
 	}
 	std::system("Pause");
@@ -73,13 +74,13 @@ float calTotalCost(int t_child, int t_adult, int t_senior)
 	float total = 0.0f; // total cost
 	float discount = 0.0f;// discount amount
 	float discountRate = 0.0f;// discount rate
-	if (t_adult > 61)
+	if (t_adult > 61) // max discount of 30%
 	{
 		discountRate = DISCOUNT_RATE_INC * 10.0f;
 	}
 	else
 	{
-		discountRate = DISCOUNT_RATE_INC * (t_adult / 6);
+		discountRate = DISCOUNT_RATE_INC * (t_adult / 6); // integer division
 	}
 	discount = t_adult * ADULT_COST * discountRate;
 	std::cout << "You are entitled to a discount of $" << std::fixed << std::setprecision(2) << discount << std::endl;
