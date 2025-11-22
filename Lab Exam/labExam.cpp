@@ -74,17 +74,19 @@ float calTotalCost(int t_child, int t_adult, int t_senior)
 	float total = 0.0f; // total cost
 	float discount = 0.0f;// discount amount
 	float discountRate = 0.0f;// discount rate
-	if (t_adult > 61) // max discount of 30%
+	int sixes = 0;// number of groups of six adults
+
+	sixes = t_adult / 6; // integer division
+	discountRate = DISCOUNT_RATE_INC * sixes;
+	if (discountRate > 0.30f) // greater than 30%
 	{
-		discountRate = DISCOUNT_RATE_INC * 10.0f;
+		discountRate = 0.30f; // max discount
 	}
-	else
-	{
-		discountRate = DISCOUNT_RATE_INC * (t_adult / 6); // integer division
-	}
+
+	
 	discount = t_adult * ADULT_COST * discountRate;
 	std::cout << "You are entitled to a discount of $" << std::fixed << std::setprecision(2) << discount << std::endl;
-	total = t_adult * ADULT_COST *( 1 - discountRate) + t_child * CHILD_COST + t_senior * SENIOR_COST;
+	total = t_adult * ADULT_COST - discount + t_child * CHILD_COST + t_senior * SENIOR_COST;
 
 	return total;
 
